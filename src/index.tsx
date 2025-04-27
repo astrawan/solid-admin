@@ -5,6 +5,7 @@ import { render } from 'solid-js/web';
 import '#ui/App.css';
 import '@fontsource-variable/outfit';
 import 'charts.css';
+import 'flatpickr/dist/flatpickr.css';
 
 import { ROUTE_PATH } from '#ui/constants';
 // import { useAuth } from '#ui/hooks';

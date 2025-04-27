@@ -1,5 +1,7 @@
 import { onCleanup, onMount } from 'solid-js';
 
+import flatpickr from 'flatpickr';
+
 import { FaSolidArrowDown, FaSolidArrowUp } from 'solid-icons/fa';
 
 import {
@@ -10,11 +12,16 @@ import {
 
 const Page = () => {
   let dateInputRef: HTMLInputElement | undefined;
+  let flatpickrInstance: flatpickr.Instance | undefined;
 
-  onMount(() => {});
+  onMount(() => {
+    if (dateInputRef) {
+      flatpickrInstance = flatpickr(dateInputRef, { mode: 'range' });
+    }
+  });
 
   onCleanup(() => {
-    //
+    flatpickrInstance?.destroy();
   });
 
   return (
