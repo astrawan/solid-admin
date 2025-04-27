@@ -1,4 +1,4 @@
-import { type JSX, Show, createEffect } from 'solid-js';
+import { type JSX, Show } from 'solid-js';
 
 import { A } from '@solidjs/router';
 
@@ -32,10 +32,6 @@ import { useUI } from '#ui/hooks';
 
 function Header(_props: JSX.HTMLAttributes<HTMLElement>) {
   const [UIState, UIActions] = useUI();
-
-  createEffect(() => {
-    console.debug('UIState.sidebar:', UIState.sidebar);
-  });
 
   return (
     <header class="header sticky top-0 z-99999 flex w-full bg-base-100 border-base-content/20 lg:border-b">

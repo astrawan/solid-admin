@@ -21,7 +21,6 @@ export function AuthProvider(props: JSX.HTMLAttributes<HTMLElement>) {
     store,
     {
       login() {
-        console.debug('login...');
         setStore('status', 'verified');
       },
       logout() {},

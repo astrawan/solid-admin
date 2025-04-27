@@ -229,7 +229,6 @@ const Page = () => {
                 <textarea
                   aria-invalid="true"
                   class="textarea validator validator:user-invalid w-full"
-                  onLoad={(evt) => console.debug('evt:', evt)}
                   placeholder="Enter a description"
                   required
                   rows={6}

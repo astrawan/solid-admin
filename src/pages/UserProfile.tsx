@@ -1,13 +1,278 @@
-import { HiOutlinePencilSquare } from 'solid-icons/hi';
+import { HiOutlinePencilSquare, HiOutlineXMark } from 'solid-icons/hi';
 
-import { Breadcrumb } from '#ui/components';
+import { Breadcrumb, Dialog } from '#ui/components';
 
 import Owner from '#ui/assets/images/user/owner.jpg';
 
 const Page = () => {
+  let personalInfoEditorDialogRef: HTMLDialogElement | undefined;
+  let addressEditorDialogRef: HTMLDialogElement | undefined;
+
   return (
     <>
       <Breadcrumb pageName="User Profile" />
+
+      <Dialog ref={personalInfoEditorDialogRef}>
+        <div class="modal-box no-scrollbar relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-base-100 p-4 lg:p-11">
+          <button
+            type="button"
+            class="absolute right-5 top-5 z-999 flex h-11 w-11 items-center justify-center rounded-full text-base-content/60 hover:bg-base-content/10 hover:text-base-content"
+            onClick={() => personalInfoEditorDialogRef?.close()}
+          >
+            <HiOutlineXMark size={24} />
+          </button>
+          <div class="px-2 pr-14">
+            <h4 class="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90">
+              Edit Personal Information
+            </h4>
+            <p class="mb-6 text-sm text-gray-500 dark:text-gray-400 lg:mb-7">
+              Update your details to keep your profile up-to-date.
+            </p>
+          </div>
+          <form class="flex flex-col">
+            <div class="custom-scrollbar h-[450px] overflow-y-auto px-2">
+              <div>
+                <h5 class="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
+                  Social Links
+                </h5>
+
+                <div class="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
+                  <div>
+                    <label
+                      for=""
+                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    >
+                      Facebook
+                    </label>
+                    <input
+                      type="url"
+                      value="https://facebook.com/PimjoHQ"
+                      class="input w-full"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      for=""
+                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    >
+                      X.com
+                    </label>
+                    <input
+                      type="url"
+                      value="https://x.com/PimjoHQ"
+                      class="input w-full"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      for=""
+                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    >
+                      Linkedin
+                    </label>
+                    <input
+                      type="url"
+                      value="https://linkedin.com/PimjoHQ"
+                      class="input w-full"
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      for=""
+                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    >
+                      Instagram
+                    </label>
+                    <input
+                      type="url"
+                      value="https://instagram.com/PimjoHQ"
+                      class="input w-full"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="mt-7">
+                <h5 class="mb-5 text-lg font-medium text-gray-800 dark:text-white/90 lg:mb-6">
+                  Personal Information
+                </h5>
+
+                <div class="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
+                  <div class="col-span-2 lg:col-span-1">
+                    <label
+                      for=""
+                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    >
+                      First Name
+                    </label>
+                    <input type="text" value="Musharof" class="input w-full" />
+                  </div>
+
+                  <div class="col-span-2 lg:col-span-1">
+                    <label
+                      for=""
+                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    >
+                      Last Name
+                    </label>
+                    <input type="text" value="Chowdhury" class="input w-full" />
+                  </div>
+
+                  <div class="col-span-2 lg:col-span-1">
+                    <label
+                      for=""
+                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    >
+                      Email Address
+                    </label>
+                    <input
+                      type="email"
+                      value="randomuser@pimjo.com"
+                      class="input w-full"
+                    />
+                  </div>
+
+                  <div class="col-span-2 lg:col-span-1">
+                    <label
+                      for=""
+                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      type="tel"
+                      value="+09 363 398 46"
+                      class="input w-full"
+                    />
+                  </div>
+
+                  <div class="col-span-2">
+                    <label
+                      for=""
+                      class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                    >
+                      Bio
+                    </label>
+                    <input
+                      type="text"
+                      value="Team Manager"
+                      class="input w-full"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 px-2 mt-6 lg:justify-end">
+              <button
+                type="button"
+                class="btn btn-soft"
+                onClick={() => personalInfoEditorDialogRef?.close()}
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onClick={() => personalInfoEditorDialogRef?.close()}
+              >
+                Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </Dialog>
+
+      <Dialog ref={addressEditorDialogRef}>
+        <div class="modal-box no-scrollbar relative flex w-full max-w-[700px] flex-col overflow-y-auto rounded-3xl p-6 bg-base-100 lg:p-11">
+          <button
+            type="button"
+            class="absolute right-5 top-5 z-999 flex h-11 w-11 items-center justify-center rounded-full text-base-content/60 hover:bg-base-content/10 hover:text-base-content"
+            onClick={() => addressEditorDialogRef?.close()}
+          >
+            <HiOutlineXMark size={24} />
+          </button>
+
+          <div class="px-2 pr-14">
+            <h4 class="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90">
+              Edit Address
+            </h4>
+            <p class="mb-6 text-sm text-gray-500 dark:text-gray-400 lg:mb-7">
+              Update your details to keep your profile up-to-date.
+            </p>
+          </div>
+          <form class="flex flex-col">
+            <div class="px-2 overflow-y-auto custom-scrollbar">
+              <div class="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
+                <div>
+                  <label
+                    for=""
+                    class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                  >
+                    Country
+                  </label>
+                  <input
+                    type="text"
+                    value="United States"
+                    class="input w-full"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    for=""
+                    class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                  >
+                    City/State
+                  </label>
+                  <input
+                    type="text"
+                    value="Arizona, United States"
+                    class="input w-full"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    for=""
+                    class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                  >
+                    Postal Code
+                  </label>
+                  <input type="text" value="ERT 2489" class="input w-full" />
+                </div>
+
+                <div>
+                  <label
+                    for=""
+                    class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400"
+                  >
+                    TAX ID
+                  </label>
+                  <input type="text" value="AS4568384" class="input w-full" />
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 mt-6 lg:justify-end">
+              <button
+                type="button"
+                class="btn btn-soft"
+                onClick={() => addressEditorDialogRef?.close()}
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onClick={() => addressEditorDialogRef?.close()}
+              >
+                Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </Dialog>
 
       <div class="rounded-2xl border border-base-content/20 bg-base-100 overflow-hidden">
         <div class="px-5 py-4 sm:px-6 sm:py-5">
@@ -121,6 +386,7 @@ const Page = () => {
               <button
                 type="button"
                 class="btn btn-outline rounded-full! border-base-content/20 hover:bg-base-300 dark:hover:bg-base-content/5"
+                onClick={() => personalInfoEditorDialogRef?.showModal()}
               >
                 <HiOutlinePencilSquare size={18} />
                 Edit
@@ -186,6 +452,7 @@ const Page = () => {
               <button
                 type="button"
                 class="btn btn-outline rounded-full! border-base-content/20 hover:bg-base-300 dark:hover:bg-base-content/5"
+                onClick={() => personalInfoEditorDialogRef?.showModal()}
               >
                 <HiOutlinePencilSquare size={18} />
                 Edit
@@ -242,6 +509,7 @@ const Page = () => {
               <button
                 type="button"
                 class="btn btn-outline rounded-full! border-base-content/20 hover:bg-base-300 dark:hover:bg-base-content/5"
+                onClick={() => addressEditorDialogRef?.showModal()}
               >
                 <HiOutlinePencilSquare size={18} />
                 Edit
