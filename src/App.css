@@ -1,0 +1,214 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  /* biome-ignore lint/correctness/noUnknownProperty: <explanation> */
+  themes: light --default, dark --prefersdark;
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+/* @custom-variant dark (&:is(.dark *)); */
+@custom-variant sidebar-mini (&:where([data-sidebar-state=mini], [data-sidebar-state=mini] *));
+@custom-variant sidebar-full (&:where([data-sidebar-state=full], [data-sidebar-state=full] *));
+@custom-variant header-menu-toggled (&:where([data-header-menu-toggled=true], [data-header-menu-toggled=true] *));
+
+@theme {
+  --font-outfit: Outfit, sans-serif;
+
+  --breakpoint-2xsm: 375px;
+  --breakpoint-xsm: 425px;
+  --breakpoint-3xl: 2000px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  --z-index-1: 1;
+  --z-index-9: 9;
+  --z-index-99: 99;
+  --z-index-999: 999;
+  --z-index-9999: 9999;
+  --z-index-99999: 99999;
+  --z-index-999999: 999999;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@utility menu-divider-horizontal {
+  @apply bg-base-content mx-1 my-2 h-px;
+}
+
+@utility menu-item {
+  @apply relative flex items-center gap-3 px-3 py-2 font-medium rounded-lg;
+}
+
+@utility menu-item-active {
+  @apply bg-primary/10 text-primary;
+}
+
+@utility menu-item-inactive {
+  @apply text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-white/5 dark:hover:text-gray-300;
+}
+
+@utility menu-item-arrow {
+  @apply absolute top-1/2 right-2.5 -translate-y-1/2;
+}
+
+@utility menu-item-arrow-active {
+  @apply rotate-180;
+}
+
+@utility menu-item-arrow-inactive {
+  @apply stroke-gray-500 group-hover:stroke-gray-700 dark:stroke-gray-400 dark:group-hover:stroke-gray-300;
+}
+
+@utility menu-dropdown-item {
+  @apply relative flex items-center gap-3 rounded-lg px-3 py-2.5 font-medium;
+}
+
+@utility menu-dropdown-item-active {
+  @apply bg-primary/10 text-primary;
+}
+
+@utility menu-dropdown-item-inactive {
+  @apply text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-white/5;
+}
+
+@utility menu-dropdown-badge {
+  @apply block rounded-full px-2.5 py-0.5 text-xs font-medium uppercase;
+}
+
+@utility no-scrollbar {
+  /* Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    @apply size-1.5;
+  }
+
+  &::-webkit-scrollbar-track {
+    @apply rounded-full;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply bg-gray-200 rounded-full;
+  }
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #344054;
+}
+
+@layer base {
+  body {
+    font-family: "Outfit Variable", sans-serif;
+    @apply bg-base-100 relative text-base font-normal z-1;
+  }
+
+  li {
+    &[data-menu-toggled="true"] {
+      .menu-dropdown-wrapper {
+        @apply block;
+      }
+
+      .menu-item-arrow {
+        @apply menu-item-arrow-active;
+      }
+    }
+
+    &[data-menu-toggled="false"] {
+      .menu-dropdown-wrapper {
+        @apply hidden;
+      }
+
+      .menu-item-arrow {
+        @apply menu-item-arrow-inactive;
+      }
+    }
+  }
+
+  .validator-success-hint {
+    @apply validator-hint;
+  }
+
+  .validator:user-valid ~ .validator-success-hint {
+    visibility: visible;
+    color: var(--color-success);
+    display: block;
+  }
+
+  .validator ~ .validator-success-hint {
+    visibility: hidden;
+  }
+}
+
+@layer utilities {
+  /* For Remove Date Icon */
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="time"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-calendar-picker-indicator,
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+  }
+}
+
+.sidebar:hover {
+  width: 290px;
+}
+.sidebar:hover .logo {
+  display: block;
+}
+.sidebar:hover .logo-icon {
+  display: none;
+}
+.sidebar:hover .sidebar-header {
+  justify-content: space-between;
+}
+.sidebar:hover .menu-group-title {
+  display: block;
+}
+.sidebar:hover .menu-group-icon {
+  display: none;
+}
+
+.sidebar:hover .menu-item-text {
+  display: inline;
+}
+
+.sidebar:hover .menu-item-arrow {
+  display: block;
+}
+
+.sidebar:hover .menu-dropdown {
+  display: flex;
+}
+
+.charts-css.column td {
+  @apply rounded-t-lg bg-primary!;
+}
