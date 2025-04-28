@@ -28,6 +28,9 @@
       "a11y": {
         "useKeyWithClickEvents": "info",
         "useValidAnchor": "info"
+      },
+      "suspicious": {
+        "noConsole": "error"
       }
     }
   }

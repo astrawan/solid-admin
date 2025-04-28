@@ -7,6 +7,7 @@ export const ROUTE_PATH_ERROR_404 = '/404';
 export const ROUTE_PATH_FORMS = '/forms';
 export const ROUTE_PATH_TABLES = '/tables';
 export const ROUTE_PATH_BASIC_TABLES = '/basic';
+export const ROUTE_PATH_OPEN_LIBRARY_TABLES = '/open-library';
 
 export const ROUTE_PATH = {
   root: '/',
@@ -29,6 +30,7 @@ export const ROUTE_PATH = {
   tables: {
     root: ROUTE_PATH_TABLES,
     basic: stringJoin(ROUTE_PATH_TABLES, ROUTE_PATH_BASIC_TABLES),
+    openLibrary: stringJoin(ROUTE_PATH_TABLES, ROUTE_PATH_OPEN_LIBRARY_TABLES),
   },
   userProfile: '/user-profile',
 };

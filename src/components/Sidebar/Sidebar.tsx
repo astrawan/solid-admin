@@ -175,7 +175,9 @@ function Sidebar(_props: JSX.HTMLAttributes<HTMLElement>) {
               <li data-menu-toggled="false">
                 <button
                   type="button"
-                  data-menu-active={pathname() === ROUTE_PATH.signIn}
+                  data-menu-active={pathname().startsWith(
+                    ROUTE_PATH.tables.root,
+                  )}
                   class="menu-item group data-[menu-active=true]:menu-item-active data-[menu-active=false]:menu-item-inactive btn-wide"
                   onClick={menuGroupToggle}
                 >
@@ -202,6 +204,22 @@ function Sidebar(_props: JSX.HTMLAttributes<HTMLElement>) {
                         class="menu-dropdown-item group data-[menu-active=true]:menu-dropdown-item-active data-[menu-active=false]:menu-dropdown-item-inactive"
                       >
                         Basic Tables
+                      </A>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="menu-dropdown-wrapper overflow-hidden transform translate">
+                  <ul class="flex flex-col gap-1 mt-2 menu-dropdown pl-9 sidebar-full:flex sidebar-mini:lg:hidden">
+                    <li>
+                      <A
+                        data-menu-active={
+                          pathname() === ROUTE_PATH.tables.openLibrary
+                        }
+                        href={ROUTE_PATH.tables.openLibrary}
+                        class="menu-dropdown-item group data-[menu-active=true]:menu-dropdown-item-active data-[menu-active=false]:menu-dropdown-item-inactive"
+                      >
+                        Open Library
                       </A>
                     </li>
                   </ul>

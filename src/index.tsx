@@ -20,6 +20,7 @@ const FormElements = lazy(() => import('#ui/pages/forms/Elements'));
 const SignIn = lazy(() => import('#ui/pages/SignIn'));
 const SignUp = lazy(() => import('#ui/pages/SignUp'));
 const TableBasic = lazy(() => import('#ui/pages/tables/Basic'));
+const TableOpenLibrary = lazy(() => import('#ui/pages/tables/OpenLibrary'));
 const UserProfile = lazy(() => import('#ui/pages/UserProfile'));
 
 function Protected(props: JSX.HTMLAttributes<HTMLElement>) {
@@ -69,6 +70,10 @@ if (root) {
           <Route path={ROUTE_PATH.forms.elements} component={FormElements} />
           <Route path={ROUTE_PATH.userProfile} component={UserProfile} />
           <Route path={ROUTE_PATH.tables.basic} component={TableBasic} />
+          <Route
+            path={ROUTE_PATH.tables.openLibrary}
+            component={TableOpenLibrary}
+          />
         </Route>
         <Route path={ROUTE_PATH.error._404} component={Error404} />
         <Route path={ROUTE_PATH.root} component={AuthLayout}>
