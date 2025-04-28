@@ -13,7 +13,7 @@ function MainLayout({ children }: JSX.HTMLAttributes<HTMLElement>) {
       <div class="relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto">
         {/* biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> */}
         <div
-          class="fixed w-full h-screen z-9 bg-base-content/50 sidebar-full:hidden sidebar-mini:block sidebar-mini:lg:hidden"
+          class="fixed w-screen h-screen z-9 modal-backdrop backdrop-blur-xs sidebar-full:hidden sidebar-mini:block sidebar-mini:lg:hidden"
           onClick={UIActions.toggleSidebar}
         />
         <Header />

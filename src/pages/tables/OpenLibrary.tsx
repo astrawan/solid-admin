@@ -9,6 +9,13 @@ import {
 } from 'solid-js';
 import { createStore } from 'solid-js/store';
 
+import {
+  HiSolidChevronDoubleLeft,
+  HiSolidChevronDoubleRight,
+  HiSolidChevronLeft,
+  HiSolidChevronRight,
+} from 'solid-icons/hi';
+
 import { OpenLibraryApi } from '#ui/api';
 
 import { Breadcrumb, Dialog } from '#ui/components';
@@ -118,10 +125,12 @@ const Page = () => {
                                 />
                               </button>
                               <Dialog>
-                                <img
-                                  src={`https://covers.openlibrary.org/b/id/${item.cover_i}-L.jpg`}
-                                  alt={`${item.title} cover`}
-                                />
+                                <div>
+                                  <img
+                                    src={`https://covers.openlibrary.org/b/id/${item.cover_i}-L.jpg`}
+                                    alt={`${item.title} cover`}
+                                  />
+                                </div>
                               </Dialog>
                             </>
                           )}
@@ -177,34 +186,20 @@ const Page = () => {
                             type="button"
                             class="join-item btn"
                             onClick={() =>
-                              setSearchQuery('offset', offsetPrev())
+                              setSearchQuery('offset', offsetFirst())
                             }
                           >
-                            ❰
+                            <HiSolidChevronDoubleLeft size={16} />
                           </button>
                           <button
                             disabled={searchResource()?.data?.offset === 0}
                             type="button"
                             class="join-item btn"
                             onClick={() =>
-                              setSearchQuery('offset', offsetFirst())
+                              setSearchQuery('offset', offsetPrev())
                             }
                           >
-                            ❰❰
-                          </button>
-                          <button
-                            type="button"
-                            class="join-item btn"
-                            disabled={
-                              searchResource()?.data.num_found ===
-                              (searchResource()?.data.offset || 0) +
-                                (searchResource()?.data.docs.length || 0)
-                            }
-                            onClick={() =>
-                              setSearchQuery('offset', offsetLast())
-                            }
-                          >
-                            ❱❱
+                            <HiSolidChevronLeft size={16} />
                           </button>
                           <button
                             type="button"
@@ -218,7 +213,21 @@ const Page = () => {
                               setSearchQuery('offset', offsetNext())
                             }
                           >
-                            ❱
+                            <HiSolidChevronRight size={16} />
+                          </button>
+                          <button
+                            type="button"
+                            class="join-item btn"
+                            disabled={
+                              searchResource()?.data.num_found ===
+                              (searchResource()?.data.offset || 0) +
+                                (searchResource()?.data.docs.length || 0)
+                            }
+                            onClick={() =>
+                              setSearchQuery('offset', offsetLast())
+                            }
+                          >
+                            <HiSolidChevronDoubleRight size={16} />
                           </button>
                         </div>
                       </div>

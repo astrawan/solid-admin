@@ -55,7 +55,10 @@ function Dialog(props: DialogProps) {
     >
       {props.children}
       <Show when={withOverlay}>
-        <form method="dialog" class="modal-backdrop backdrop-blur-xs">
+        <form
+          method="dialog"
+          class="modal-backdrop backdrop-blur-xs absolute w-screen h-screen"
+        >
           <button
             type="button"
             onClick={() => {
