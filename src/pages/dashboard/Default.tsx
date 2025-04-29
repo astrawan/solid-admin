@@ -1,5 +1,7 @@
 import { onCleanup, onMount } from 'solid-js';
 
+import ApexCharts from 'apexcharts';
+
 import flatpickr from 'flatpickr';
 
 import { FaSolidArrowDown, FaSolidArrowUp } from 'solid-icons/fa';
@@ -13,14 +15,274 @@ import {
 const Page = () => {
   let dateInputRef: HTMLInputElement | undefined;
   let flatpickrInstance: flatpickr.Instance | undefined;
+  let chartOne: ApexCharts | undefined;
+  let chartTwo: ApexCharts | undefined;
+  let chartThree: ApexCharts | undefined;
 
   onMount(() => {
+    const chartOneOptions = {
+      series: [
+        {
+          name: 'Sales',
+          data: [168, 385, 201, 298, 187, 195, 291, 110, 215, 390, 280, 112],
+        },
+      ],
+      colors: ['#465fff'],
+      chart: {
+        fontFamily: 'Outfit, sans-serif',
+        type: 'bar',
+        height: 180,
+        toolbar: {
+          show: false,
+        },
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+          columnWidth: '39%',
+          borderRadius: 5,
+          borderRadiusApplication: 'end',
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        show: true,
+        width: 4,
+        colors: ['transparent'],
+      },
+      xaxis: {
+        categories: [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ],
+        axisBorder: {
+          show: false,
+        },
+        axisTicks: {
+          show: false,
+        },
+      },
+      legend: {
+        show: true,
+        position: 'top',
+        horizontalAlign: 'left',
+        fontFamily: 'Outfit',
+
+        markers: {
+          radius: 99,
+        },
+      },
+      yaxis: {
+        title: false,
+      },
+      grid: {
+        yaxis: {
+          lines: {
+            show: true,
+          },
+        },
+      },
+      fill: {
+        opacity: 1,
+      },
+
+      tooltip: {
+        x: {
+          show: false,
+        },
+        y: {
+          formatter: (val: string) => val,
+        },
+      },
+    };
+
+    const chartOneEl = document.querySelector('#chartOne');
+
+    if (chartOneEl) {
+      chartOne = new ApexCharts(chartOneEl, chartOneOptions);
+      chartOne.render();
+    }
+
+    const chartTwoOptions = {
+      series: [75.55],
+      colors: ['#465FFF'],
+      chart: {
+        fontFamily: 'Outfit, sans-serif',
+        type: 'radialBar',
+        height: 330,
+        sparkline: {
+          enabled: true,
+        },
+      },
+      plotOptions: {
+        radialBar: {
+          startAngle: -90,
+          endAngle: 90,
+          hollow: {
+            size: '80%',
+          },
+          track: {
+            background: '#E4E7EC',
+            strokeWidth: '100%',
+            margin: 5, // margin is in pixels
+          },
+          dataLabels: {
+            name: {
+              show: false,
+            },
+            value: {
+              fontSize: '36px',
+              fontWeight: '600',
+              offsetY: 60,
+              color: '#1D2939',
+              formatter: (val: string) => `${val}%`,
+            },
+          },
+        },
+      },
+      fill: {
+        type: 'solid',
+        colors: ['#465FFF'],
+      },
+      stroke: {
+        lineCap: 'round',
+      },
+      labels: ['Progress'],
+    };
+
+    const chartTwoEl = document.querySelector('#chartTwo');
+
+    if (chartTwoEl) {
+      chartTwo = new ApexCharts(chartTwoEl, chartTwoOptions);
+      chartTwo.render();
+    }
+
+    const chartThreeOptions = {
+      series: [
+        {
+          name: 'Sales',
+          data: [180, 190, 170, 160, 175, 165, 170, 205, 230, 210, 240, 235],
+        },
+        {
+          name: 'Revenue',
+          data: [40, 30, 50, 40, 55, 40, 70, 100, 110, 120, 150, 140],
+        },
+      ],
+      legend: {
+        show: false,
+        position: 'top',
+        horizontalAlign: 'left',
+      },
+      colors: ['#465FFF', '#9CB9FF'],
+      chart: {
+        fontFamily: 'Outfit, sans-serif',
+        height: 310,
+        type: 'area',
+        toolbar: {
+          show: false,
+        },
+      },
+      fill: {
+        gradient: {
+          enabled: true,
+          opacityFrom: 0.55,
+          opacityTo: 0,
+        },
+      },
+      stroke: {
+        curve: 'straight',
+        width: ['2', '2'],
+      },
+
+      markers: {
+        size: 0,
+      },
+      labels: {
+        show: false,
+        position: 'top',
+      },
+      grid: {
+        xaxis: {
+          lines: {
+            show: false,
+          },
+        },
+        yaxis: {
+          lines: {
+            show: true,
+          },
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      tooltip: {
+        x: {
+          format: 'dd MMM yyyy',
+        },
+      },
+      xaxis: {
+        type: 'category',
+        categories: [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ],
+        axisBorder: {
+          show: false,
+        },
+        axisTicks: {
+          show: false,
+        },
+        tooltip: false,
+      },
+      yaxis: {
+        title: {
+          style: {
+            fontSize: '0px',
+          },
+        },
+      },
+    };
+
+    const chartThreeEl = document.querySelector('#chartThree');
+
+    if (chartThreeEl) {
+      chartThree = new ApexCharts(chartThreeEl, chartThreeOptions);
+      chartThree.render();
+    }
+
     if (dateInputRef) {
       flatpickrInstance = flatpickr(dateInputRef, { mode: 'range' });
     }
   });
 
   onCleanup(() => {
+    chartOne?.destroy();
+    chartTwo?.destroy();
+    chartThree?.destroy();
+
     flatpickrInstance?.destroy();
   });
 
@@ -91,65 +353,10 @@ const Page = () => {
 
           <div class="max-w-full overflow-x-auto custom-scrollbar">
             <div class="-ml-5 min-w-[650px] px-8 py-8 xl:min-w-full">
-              <table class="charts-css column show-labels show-4-secondary-axes data-spacing-16">
-                <caption> Column Example #13 </caption>
-                <thead>
-                  <tr>
-                    <th scope="col">Month</th>
-                    <th scope="col">Progress</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row"> Jan </th>
-                    <td style="--size: 0.2;" />
-                  </tr>
-                  <tr>
-                    <th scope="row"> Feb </th>
-                    <td style="--size: 0.4;" />
-                  </tr>
-                  <tr>
-                    <th scope="row"> Mar </th>
-                    <td style="--size: 0.6;" />
-                  </tr>
-                  <tr>
-                    <th scope="row"> Apr </th>
-                    <td style="--size: 0.8;" />
-                  </tr>
-                  <tr>
-                    <th scope="row"> May </th>
-                    <td style="--size: 1;" />
-                  </tr>
-                  <tr>
-                    <th scope="row"> Jun </th>
-                    <td style="--size: 1;" />
-                  </tr>
-                  <tr>
-                    <th scope="row"> Jul </th>
-                    <td style="--size: 1;" />
-                  </tr>
-                  <tr>
-                    <th scope="row"> Aug </th>
-                    <td style="--size: 1;" />
-                  </tr>
-                  <tr>
-                    <th scope="row"> Sep </th>
-                    <td style="--size: 1;" />
-                  </tr>
-                  <tr>
-                    <th scope="row"> Oct </th>
-                    <td style="--size: 1;" />
-                  </tr>
-                  <tr>
-                    <th scope="row"> Nov </th>
-                    <td style="--size: 1;" />
-                  </tr>
-                  <tr>
-                    <th scope="row"> Dec </th>
-                    <td style="--size: 1;" />
-                  </tr>
-                </tbody>
-              </table>
+              <div
+                id="chartOne"
+                class="-ml-5 h-full min-w-[650px] pl-2 xl:min-w-full"
+              />
             </div>
           </div>
         </div>
@@ -176,24 +383,11 @@ const Page = () => {
                 </button>
               </div>
             </div>
-            <div class="relative">
-              <div class="h-full px-4 py-4">
-                <table class="charts-css pie max-h-[270px] max-w-[270px]">
-                  <caption> Pie Example #1 </caption>
-                  <tbody>
-                    <tr>
-                      <td style="--start: 0.0; --end: 0.2445;">
-                        <span class="data">24.45%</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="--start: 0.2445; --end: 1.0; --color: rgba(0, 0, 255, 0.60);">
-                        <span class="data">75.55%</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+            <div class="relative max-h-[195px]">
+              <div id="chartTwo" class="h-full" />
+              <span class="absolute left-1/2 top-[85%] -translate-x-1/2 -translate-y-[85%] badge badge-soft badge-success">
+                +10%
+              </span>
             </div>
             <p class="mx-auto mt-1.5 w-full max-w-[380px] text-center text-sm text-gray-500 sm:text-base">
               You earn $3287 today, it's higher than last month. Keep up your
@@ -287,126 +481,7 @@ const Page = () => {
             </div>
           </div>
           <div class="max-w-full overflow-x-auto custom-scrollbar">
-            <table class="charts-css area multiple hide-data show-labels show-5-secondary-axes">
-              <caption> Area Example #8 </caption>
-              <thead>
-                <tr>
-                  <th scope="col"> Month </th>
-                  <th scope="col"> Progress 1 </th>
-                  <th scope="col"> Progress 2 </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row"> Jan </th>
-                  <td style="--start: 0.7; --end: 0.8; --color: var(--color-primary);">
-                    <span class="data"> 50 </span>
-                  </td>
-                  <td style="--start: 0.2; --end: 0.15;">
-                    <span class="data"> 20 </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row"> Feb </th>
-                  <td style="--start: 0.8; --end: 0.65; --color: var(--color-primary);">
-                    <span class="data"> 80 </span>
-                  </td>
-                  <td style="--start: 0.15; --end: 0.25;">
-                    <span class="data"> 50 </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row"> Mar </th>
-                  <td style="--start: 0.65; --end: 0.6; --color: var(--color-primary);">
-                    <span class="data"> 80 </span>
-                  </td>
-                  <td style="--start: 0.25; --end: 0.3;">
-                    <span class="data"> 50 </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row"> Apr </th>
-                  <td style="--start: 0.6; --end: 0.55; --color: var(--color-primary);">
-                    <span class="data"> 40 </span>
-                  </td>
-                  <td style="--start: 0.3; --end: 0.4;">
-                    <span class="data"> 30 </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row"> May </th>
-                  <td style="--start: 0.55; --end: 0.6; --color: var(--color-primary);">
-                    <span class="data"> 40 </span>
-                  </td>
-                  <td style="--start: 0.4; --end: 0.35;">
-                    <span class="data"> 30 </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row"> Jun </th>
-                  <td style="--start: 0.6; --end: 0.55; --color: var(--color-primary);">
-                    <span class="data"> 40 </span>
-                  </td>
-                  <td style="--start: 0.35; --end: 0.4;">
-                    <span class="data"> 30 </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row"> Jul </th>
-                  <td style="--start: 0.55; --end: 0.6; --color: var(--color-primary);">
-                    <span class="data"> 40 </span>
-                  </td>
-                  <td style="--start: 0.4; --end: 0.35;">
-                    <span class="data"> 30 </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row"> Aug </th>
-                  <td style="--start: 0.6; --end: 0.65; --color: var(--color-primary);">
-                    <span class="data"> 40 </span>
-                  </td>
-                  <td style="--start: 0.35; --end: 0.3;">
-                    <span class="data"> 30 </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row"> Sep </th>
-                  <td style="--start: 0.65; --end: 0.7; --color: var(--color-primary);">
-                    <span class="data"> 40 </span>
-                  </td>
-                  <td style="--start: 0.3; --end: 0.25;">
-                    <span class="data"> 30 </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row"> Oct </th>
-                  <td style="--start: 0.7; --end: 0.68; --color: var(--color-primary);">
-                    <span class="data"> 40 </span>
-                  </td>
-                  <td style="--start: 0.25; --end: 0.25;">
-                    <span class="data"> 30 </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row"> Nov </th>
-                  <td style="--start: 0.68; --end: 0.75; --color: var(--color-primary);">
-                    <span class="data"> 40 </span>
-                  </td>
-                  <td style="--start: 0.25; --end: 0.35;">
-                    <span class="data"> 30 </span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row"> Dec </th>
-                  <td style="--start: 0.75; --end: 0.85; --color: var(--color-primary);">
-                    <span class="data"> 40 </span>
-                  </td>
-                  <td style="--start: 0.35; --end: 0.45;">
-                    <span class="data"> 30 </span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div id="chartThree" class="-ml-4 min-w-[700px] pl-2" />
           </div>
         </div>
       </div>

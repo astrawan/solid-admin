@@ -13,6 +13,8 @@ import {
   HiOutlineUserCircle,
 } from 'solid-icons/hi';
 
+import { useUI } from '#ui/hooks';
+
 import LogoDark from '#ui/assets/images/logo/logo-dark.svg';
 import LogoIcon from '#ui/assets/images/logo/logo-icon.svg';
 import Logo from '#ui/assets/images/logo/logo.svg';
@@ -21,6 +23,7 @@ import { ROUTE_PATH } from '#ui/constants';
 
 function Sidebar(_props: JSX.HTMLAttributes<HTMLElement>) {
   const location = useLocation();
+  const [_, UIActions] = useUI();
 
   const pathname = createMemo(() => location.pathname);
 

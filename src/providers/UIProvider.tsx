@@ -1,4 +1,5 @@
-import { type JSX, createEffect, onMount } from 'solid-js';
+import { useLocation } from '@solidjs/router';
+import { type JSX, createEffect, createMemo, onMount } from 'solid-js';
 import { createStore } from 'solid-js/store';
 
 import {
@@ -9,6 +10,10 @@ import {
 } from '#ui/context';
 
 export function UIProvider(props: JSX.HTMLAttributes<HTMLElement>) {
+  const location = useLocation();
+  const pathname = createMemo(() => location.pathname);
+  let lastPathname: string | undefined;
+
   const [store, setStore] = createStore<UIContextValue[0]>(
     UIContext.defaultValue[0],
   );
@@ -36,6 +41,18 @@ export function UIProvider(props: JSX.HTMLAttributes<HTMLElement>) {
       ) {
         setStore('theme', theme);
       }
+    }
+  });
+
+  createEffect(() => {
+    const _pathname = pathname();
+    if (
+      _pathname &&
+      !window.matchMedia('(min-width: 64rem)').matches &&
+      lastPathname !== _pathname
+    ) {
+      lastPathname = _pathname;
+      setStore('sidebar', 'full');
     }
   });
 

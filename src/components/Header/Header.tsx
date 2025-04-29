@@ -116,12 +116,10 @@ function Header(_props: JSX.HTMLAttributes<HTMLElement>) {
               </Show>
             </button>
 
-            <div
-              class="relative"
-              x-data="{ dropdownOpen: false, notifying: true }"
-            >
+            <div class="dropdown lg:dropdown-end">
               <button
                 aria-label="Notifications"
+                tabindex={0}
                 type="button"
                 class="relative flex h-11 w-11 items-center justify-center rounded-full border border-base-content/20 text-base-content/50 hover:bg-base-content/5 hover:text-base-content"
               >
@@ -132,27 +130,36 @@ function Header(_props: JSX.HTMLAttributes<HTMLElement>) {
               </button>
 
               <div
-                x-show="dropdownOpen"
-                class="shadow-theme-lg dark:bg-gray-dark absolute -right-[240px] mt-[17px] flex h-[480px] w-[350px] flex-col rounded-2xl border border-base-content/20 bg-white p-3 sm:w-[361px] lg:right-0"
-                style="display: none;"
+                class="dropdown-content menu bg-base-100 flex flex-col mt-[17px] h-[480px] w-[350px] rounded-box border border-base-content/20 p-3 sm:w-[361px]"
+                tabindex={0}
               >
-                <div class="mb-3 flex items-center justify-between border-b border-base-content/20 pb-3">
+                <div class="flex items-center justify-between border-b border-base-content/20 pb-3">
                   <h5 class="text-lg font-semibold text-gray-800 dark:text-white/90">
                     Notification
                   </h5>
 
                   <button
+                    tabindex={0}
                     type="button"
                     class="text-gray-500 dark:text-gray-400"
+                    onClick={() => {
+                      const btnEl =
+                        document.activeElement?.parentElement?.querySelector(
+                          'button',
+                        );
+                      if (btnEl) {
+                        btnEl.blur();
+                      }
+                    }}
                   >
-                    <HiOutlineBell size={24} />
+                    <HiOutlineXMark size={24} />
                   </button>
                 </div>
 
-                <ul class="custom-scrollbar flex h-auto flex-col overflow-y-auto">
+                <ul class="flex-1 flex flex-col overflow-y-auto">
                   <li>
                     <a
-                      class="flex gap-3 rounded-lg border-b border-base-content/20 p-3 px-4.5 py-3 hover:bg-gray-100 dark:hover:bg-white/5"
+                      class="flex gap-3 rounded-lg border-b border-base-content/10 p-3 px-4.5 py-3 hover:bg-base-content/5"
                       href="/"
                     >
                       <span class="relative z-1 block h-10 w-full max-w-10 rounded-full">
@@ -390,7 +397,7 @@ function Header(_props: JSX.HTMLAttributes<HTMLElement>) {
 
                   <li>
                     <a
-                      class="flex gap-3 rounded-lg border-b border-base-content p-3 px-4.5 py-3 hover:bg-gray-100 dark:hover:bg-white/5"
+                      class="flex gap-3 rounded-lg border-b border-base-content/20 p-3 px-4.5 py-3 hover:bg-gray-100 dark:hover:bg-white/5"
                       href="/"
                     >
                       <span class="relative z-1 block h-10 w-full max-w-10 rounded-full">
@@ -423,12 +430,23 @@ function Header(_props: JSX.HTMLAttributes<HTMLElement>) {
                   </li>
                 </ul>
 
-                <a
-                  href="/"
-                  class="text-theme-sm shadow-theme-xs mt-3 flex justify-center rounded-lg border border-gray-300 bg-white p-3 font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-base-content/20 dark:text-gray-400 dark:hover:bg-white/[0.03] dark:hover:text-gray-200"
-                >
-                  View All Notification
-                </a>
+                <div class="pt-2 flex flex-col">
+                  <button
+                    type="button"
+                    class="btn btn-outline btn-primary"
+                    onClick={() => {
+                      const btnEl =
+                        document.activeElement?.parentElement?.querySelector(
+                          'button',
+                        );
+                      if (btnEl) {
+                        btnEl.blur();
+                      }
+                    }}
+                  >
+                    View All Notification
+                  </button>
+                </div>
               </div>
             </div>
           </div>
